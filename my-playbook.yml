@@ -1,0 +1,76 @@
+---
+- hosts: wildfly
+  remote_user: robin
+
+  handlers:
+    - name: reload wildfly service
+      service: name=wildfly state=reloaded enabled=yes
+
+  tasks:
+    - name: Install openJDK
+      package:
+        name: openjdk-8-jdk-headless
+        state: present
+
+    - name: Adduser Wildfly
+      user:
+        name: wildfly
+        state: present
+
+    - name: create dir
+      file:
+        path: /opt/wildfly
+        state: directory
+        owner: wildfly
+        group: wildfly
+
+    - name: Download wildfly
+      get_url:
+        url: http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.tar.gz
+        dest: /opt/
+
+    - name: unarchive
+      unarchive:
+        src: wildfly-11.0.0.Final.tar.gz
+        dest: /opt/
+
+    - name: rename
+      command: mv /opt/wildfly-11.0.0.Final/* /opt/wildfly/
+
+    - name: give permission to wildfly user
+      file:
+        dest: /opt/wildfly
+        owner: wildfly
+        group: wildlfy
+        mode: u=rwX,g=rX,o=rX
+        recurse: yes
+
+    - name: create dir /etc/wildfly
+      file:
+        path: /etc/wildfly
+        state: directory
+        owner: wildfly
+        group: wildfly
+
+    - name: copy config file
+      copy:
+        src: /opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf
+        dest: /etc/wildfly/
+
+    - name: copy service file
+      copy:
+        src: /opt/wildfly/docs/contrib/scripts/systemd/wildfly.service
+        dest: /etc/wildfly/
+
+    - name: copy launch file
+      copy:
+        src: /opt/wildfly/docs/contrib/scripts/systemd/launch.sh
+        dest: /etc/wildfly
+
+    - name: enable wildfly at start
+      become: yes
+      command: systemctl enable wildfly
+
+    - name: daemon reload
+      become: yes
+      command: systemctl daemon-reload
