@@ -1,0 +1,9 @@
+/home/robin/ansibleb3/src/main/java/inscription/modele/Inscription.java
+/home/robin/ansibleb3/src/main/java/inscription/modele/InscriptionInvalideException.java
+/home/robin/ansibleb3/src/main/java/inscription/modele/InscriptionService.java
+/home/robin/ansibleb3/src/main/java/inscription/web/client/ClientTest.java
+/home/robin/ansibleb3/src/main/java/inscription/web/InscriptionControleurServlet.java
+/home/robin/ansibleb3/src/main/java/inscription/web/Utf8EncodingFilter.java
+/home/robin/ansibleb3/src/main/java/inscription/web/HelloResource.java
+/home/robin/ansibleb3/src/main/java/inscription/web/InscriptionResource.java
+/home/robin/ansibleb3/src/main/java/inscription/web/InscriptionInvalideExceptionMapper.java

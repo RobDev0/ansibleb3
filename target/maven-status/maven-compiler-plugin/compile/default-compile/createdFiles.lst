@@ -1,0 +1,9 @@
+inscription/modele/Inscription.class
+inscription/modele/InscriptionService.class
+inscription/web/HelloResource.class
+inscription/web/client/ClientTest.class
+inscription/web/Utf8EncodingFilter.class
+inscription/web/InscriptionControleurServlet.class
+inscription/web/InscriptionInvalideExceptionMapper.class
+inscription/modele/InscriptionInvalideException.class
+inscription/web/InscriptionResource.class
